@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.cyan,
+        primarySwatch: Colors.pink,
       ),
       home: MyHomePage(title: 'Luncher - Lounastaja'),
     );
@@ -84,16 +84,19 @@ class _MyHomePageState extends State<MyHomePage> {
         Text(
           'Arvo lounaspaikka',
         ),
-        FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              _restaurants = drawRestaurants(_restaurants, _initialRollAmount);
-              _clicked = true;
-            });
-          },
-          tooltip: 'Increment',
-          child: ImageRotate(),
-        ),
+        Padding(
+            padding: EdgeInsets.all(16.0),
+            child: FloatingActionButton(
+              onPressed: () {
+                setState(() {
+                  _restaurants =
+                      drawRestaurants(_restaurants, _initialRollAmount);
+                  _clicked = true;
+                });
+              },
+              tooltip: 'Increment',
+              child: ImageRotate(),
+            ))
       ],
     );
 
@@ -105,16 +108,19 @@ class _MyHomePageState extends State<MyHomePage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         ...renderResult,
-        FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              _restaurants = drawRestaurants(_restaurants, _finalRollAmount);
-              _rerolled = true;
-            });
-          },
-          tooltip: 'Increment',
-          child: ImageRotate(),
-        ),
+        Padding(
+            padding: EdgeInsets.all(16.0),
+            child: FloatingActionButton(
+              onPressed: () {
+                setState(() {
+                  _restaurants =
+                      drawRestaurants(_restaurants, _finalRollAmount);
+                  _rerolled = true;
+                });
+              },
+              tooltip: 'Increment',
+              child: ImageRotate(),
+            ))
       ],
     );
 
@@ -127,21 +133,23 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: bodyColumn,
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _handleReset,
-        tooltip: 'Handle reset',
-        child: Icon(Icons.add),
-      ),
-    );
+        appBar: AppBar(
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          title: Text(widget.title),
+        ),
+        body: Center(
+          // Center is a layout widget. It takes a single child and positions it
+          // in the middle of the parent.
+          child: bodyColumn,
+        ),
+        floatingActionButton: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: FloatingActionButton(
+            onPressed: _handleReset,
+            tooltip: 'Handle reset',
+            child: Icon(Icons.reset_tv),
+          ),
+        ));
   }
 }
