@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:testproject/InitialLotteryStatus.dart';
 import 'package:testproject/restaurants.dart';
 import 'package:testproject/rotateImage.dart';
 
@@ -56,6 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final int _finalRollAmount = 1;
 
   List<Restaurant> _restaurants;
+
   @override
   void initState() {
     super.initState();
@@ -78,9 +78,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    List<Restaurant> lotterized =
-        drawRestaurants(_restaurants, _initialRollAmount);
-
     Column initialView = Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -90,8 +87,8 @@ class _MyHomePageState extends State<MyHomePage> {
         FloatingActionButton(
           onPressed: () {
             setState(() {
+              _restaurants = drawRestaurants(_restaurants, _initialRollAmount);
               _clicked = true;
-              // InitialLotteryStatus();
             });
           },
           tooltip: 'Increment',
@@ -100,21 +97,24 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
     );
 
-    var renderResult =
-        lotterized.map((restaurant) => new Text("${restaurant.name}")).toList();
+    var renderResult = _restaurants
+        .map((restaurant) => new Text("${restaurant.name}"))
+        .toList();
 
     Column resultsView = Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         ...renderResult,
         FloatingActionButton(
-            onPressed: () {
-              setState(() {
-                InitialLotteryStatus();
-              });
-            },
-            tooltip: 'Reroll',
-            child: ImageRotate()),
+          onPressed: () {
+            setState(() {
+              _restaurants = drawRestaurants(_restaurants, _finalRollAmount);
+              _rerolled = true;
+            });
+          },
+          tooltip: 'Increment',
+          child: ImageRotate(),
+        ),
       ],
     );
 
